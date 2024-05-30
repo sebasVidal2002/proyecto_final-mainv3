@@ -27,8 +27,12 @@ const Register = () => {
         throw new Error("El objeto de usuario no está definido.");
       }
     } catch (error) {
-      console.error("Error al registrar el usuario:", error);
-      alert("Error al registrar el usuario: " + error.message);
+      if (error.code === 'auth/email-already-in-use') {
+        alert("El correo electrónico ya está en uso. Por favor, usa otro correo o inicia sesión.");
+      } else {
+        console.error("Error al registrar el usuario:", error);
+        alert("Error al registrar el usuario: " + error.message);
+      }
     }
   };
 
